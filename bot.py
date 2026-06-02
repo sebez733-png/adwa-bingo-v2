@@ -162,6 +162,27 @@ async def handle_web_app_data(update: Update, context: ContextTypes.DEFAULT_TYPE
     print(f"🎮 Bingo win received from {user_name} ({user_id})! Data: {data}")
     await update.message.reply_text(f"🎉 Congratulations! Your bingo result has been recorded!\n\nData: {data}")
 
+
+# --------------------------
+# MISSING FUNCTIONS FIX
+# --------------------------
+async def change_lang(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+    keyboard = InlineKeyboardMarkup([
+        [
+            InlineKeyboardButton("🇪🇹 አማርኛ", callback_data="lang_am"),
+            InlineKeyboardButton("🇸🇬 English", callback_data="lang_en")
+        ]
+    ])
+    await update.message.reply_text(t('select_language', 'en'), reply_markup=keyboard)
+
+async def handle_web_app_data(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+    user_name = update.effective_user.first_name
+    data = update.message.web_app_data.data
+    print(f"🎮 Bingo win received from {user_name} ({user_id})! Data: {data}")
+    await update.message.reply_text(f"🎉 Congratulations! Your bingo result has been recorded!\n\nData: {data}")
+
 # ==========================
 # APP SETUP & START
 # ==========================
