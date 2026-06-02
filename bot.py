@@ -1,3 +1,9 @@
+import os
+from dotenv import load_dotenv
+
+# Load the secrets from the .env file
+load_dotenv()
+
 from telegram import ReplyKeyboardMarkup, KeyboardButton, Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes, CallbackQueryHandler
 import threading
@@ -12,9 +18,9 @@ from socket_server import flask_app, socketio, run_socket_server, games, BingoGa
 from api import api_bp  # Import the API blueprint
 
 # --------------------------
-# CONFIG
+# CONFIG (Now secure from .env!)
 # --------------------------
-TOKEN = "8607291518:AAG1IFDDL4CrB8puYNkG8ZWbOTxOl8uK6xo"
+TOKEN = os.getenv("BOT_TOKEN")
 BOT_USERNAME = "adwabingiobot"
 ADMIN_IDS = [7627811244, 1119881250]
 MINI_APP_URL = "https://sebez733-png.github.io/bingio-mini-app/"
